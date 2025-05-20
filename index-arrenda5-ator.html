@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Recibo de Arrendamiento</title>
+  <style>
+    :root {
+      --primary-color: #3a7bd5;
+      --secondary-color: #00d2ff;
+      --dark-color: #2c3e50;
+      --light-color: #f9f9f9;
+      --accent-color: #00c483;
+      --text-color: #333333;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ee 100%);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    /* Header con redes sociales */
+    header {
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow);
+    }
+    
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+    
+    .brand {
+      display: flex;
+      align-items: center;
+    }
+    
+    .brand img {
+      width: 32px;
+      margin-right: 10px;
+    }
+    
+    .brand h2 {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    
+    .social-icons {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .social-icons i {
+      font-size: 22px;
+      cursor: pointer;
+      color: white;
+      transition: var(--transition);
+    }
+    
+    .social-icons i:hover {
+      transform: translateY(-3px) scale(1.1);
+    }
+    
+    /* Hover con colores específicos */
+    .fa-whatsapp:hover {
+      color: #25D366;
+      text-shadow: 0 0 10px rgba(37, 211, 102, 0.6);
+    }
+    
+    .fa-facebook:hover {
+      color: #1877F2;
+      text-shadow: 0 0 10px rgba(24, 119, 242, 0.6);
+    }
+    
+    .fa-instagram:hover {
+      color: #E4405F;
+      text-shadow: 0 0 10px rgba(228, 64, 95, 0.6);
+    }
+    
+    .fa-envelope:hover {
+      color: #D44638;
+      text-shadow: 0 0 10px rgba(212, 70, 56, 0.6);
+    }
+    
+    .fa-telegram:hover {
+      color: #0088cc;
+      text-shadow: 0 0 10px rgba(0, 136, 204, 0.6);
+    }
+    
+    .fa-linkedin:hover {
+      color: #0A66C2;
+      text-shadow: 0 0 10px rgba(10, 102, 194, 0.6);
+    }
+
+    /* Contenido principal */
+    .main-container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    
+    .title-section {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .title-section h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+    }
+    
+    .title-section p {
+      color: #666;
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Menú de navegación */
+    .menu-tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    
+    .menu-tabs button {
+      padding: 12px 24px;
+      font-size: 16px;
+      background: white;
+      border: none;
+      border-radius: 50px;
+      color: var(--primary-color);
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 600;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .menu-tabs button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: var(--transition);
+    }
+    
+    .menu-tabs button:hover::before {
+      left: 100%;
+    }
+    
+    .menu-tabs button:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      color: white;
+      box-shadow: 0 7px 15px rgba(58, 123, 213, 0.4);
+    }
+    
+    .menu-tabs button.active {
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      color: white;
+    }
+
+    /* Panel de contenido */
+    .content-panel {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      min-height: 250px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .content-panel h2 {
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+    
+    .content-panel p, .content-panel ul {
+      font-size: 1.1rem;
+      color: #555;
+    }
+    
+    .content-panel ul {
+      padding-left: 20px;
+      margin-top: 15px;
+    }
+    
+    .content-panel li {
+      margin-bottom: 10px;
+      position: relative;
+    }
+    
+    .content-panel li::before {
+      content: "✓";
+      color: var(--accent-color);
+      position: absolute;
+      left: -20px;
+      font-weight: bold;
+    }
+    
+    /* Animaciones */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--dark-color);
+      padding: 25px 0;
+      text-align: center;
+      color: white;
+      margin-top: 60px;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .footer-content img {
+      width: 22px;
+      vertical-align: middle;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .menu-tabs button {
+        padding: 10px 16px;
+        font-size: 14px;
+      }
+      
+      .content-panel {
+        padding: 25px;
+      }
+      
+      .title-section h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+
+  <!-- Carga de iconos de Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-xh6a7zYUGLEtKtvFrBQrM8c3+CBKCl1h8bcG7zNCE9aMdjv+L1f7f0yP+9gW5XfUV68N1CgrqWckAykrSQQqRw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Carga de fuente Poppins -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+  <!--iconos libreriabox-->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+<body>
+
+  <!-- Header con redes sociales -->
+  <header>
+    <div class="header-container">
+      <div class="brand">
+        <img src="https://img.icons8.com/color/48/microsoft-excel-2019--v1.png" alt="Excel Icon" />
+        <h2>Recibos de Arrendamiento</h2>
+      </div>
+      <div class="social-icons">
+        <i class="fab fa-whatsapp" title="WhatsApp" onclick="abrirRed('whatsapp')"></i>
+        <i class="fab fa-facebook" title="Facebook" onclick="abrirRed('facebook')"></i>
+        <i class="fab fa-instagram" title="Instagram" onclick="abrirRed('instagram')"></i>
+        <i class="fas fa-envelope" title="Correo" onclick="abrirRed('correo')"></i>
+        <i class="fab fa-telegram" title="Telegram" onclick="abrirRed('telegram')"></i>
+        <i class="fab fa-linkedin" title="LinkedIn" onclick="abrirRed('linkedin')"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <div class="main-container">
+    <div class="title-section">
+      <h1>Recibo de Arrendamiento en Excel y PDF</h1>
+      <p>Una solución profesional para gestionar tus documentos de arrendamiento de manera eficiente</p>
+    </div>
+
+    <div class="menu-tabs">
+      <button id="btn-descripcion" onclick="mostrarContenido('descripcion')">Descripción</button>
+      <button id="btn-caracteristicas" onclick="mostrarContenido('caracteristicas')">Características</button>
+      <button id="btn-uso" onclick="mostrarContenido('uso')">¿Cómo usar?</button>
+      <button id="btn-beneficios" onclick="mostrarContenido('beneficios')">Beneficios</button>
+    </div>
+
+    <div class="content-panel" id="panelContenido">
+      <!-- El contenido se cargará dinámicamente -->
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <img src="https://img.icons8.com/color/48/microsoft-excel-2019--v1.png" alt="Excel Icon" />
+      <span>© 2025 Anthony - Todos los derechos reservados</span>
+    </div>
+  </footer>
+
+  <script>
+    // Función para mostrar contenido según la sección seleccionada
+    function mostrarContenido(seccion) {
+      // Quitar clase activa de todos los botones
+      document.querySelectorAll('.menu-tabs button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Agregar clase activa al botón correspondiente
+      document.getElementById('btn-' + seccion).classList.add('active');
+      
+      let contenido = '';
+      let panel = document.getElementById('panelContenido');
+
+      // Añadir clase para efecto de desvanecimiento
+      panel.style.opacity = 0;
+
+      setTimeout(() => {
+        switch (seccion) {
+          case 'descripcion':
+            contenido = `
+              <h2>Descripción de la Plantilla</h2>
+              <p>Nuestra plantilla de recibo de arrendamiento es una solución completa y profesional diseñada para propietarios, administradores de propiedades y agentes inmobiliarios que necesitan generar documentación precisa y de aspecto profesional.</p>
+              <p>Desarrollada con las mejores prácticas en Excel, esta plantilla es completamente editable y permite exportación instantánea a formato PDF para compartir fácilmente con inquilinos y mantener registros digitales organizados.</p>
+                    <h2>Formato de Recibo de Arrendamiento en Excel</h2>
+                    <p>
+                        El Formato de Recibo de Arrendamiento en Excel es una herramienta ideal para propietarios e inmobiliarias que buscan llevar un control detallado y profesional de los pagos de alquiler. Esta plantilla está diseñada para facilitar la creación de recibos de renta, asegurando que cada transacción quede registrada de manera clara y organizada.
+                    </p>
+                    <p>
+                        Con esta plantilla, podrás generar recibos personalizados que incluyan toda la información necesaria, como el nombre del arrendatario, la fecha de pago, el monto recibido, el concepto del pago y el método de pago utilizado. Además, la plantilla permite la automatización de la fecha y el número de recibo, y es totalmente adaptable a las necesidades visuales de tu negocio, permitiendo incluir logotipos, colores corporativos y más.
+                    </p>
+                    <p>
+                        La funcionalidad principal de esta plantilla es garantizar que tanto arrendadores como arrendatarios cuenten con un comprobante de pago confiable, que puede utilizarse para fines contables, fiscales o como simple evidencia documental. Además, su facilidad de uso y la posibilidad de exportar los recibos a PDF hacen que sea una solución práctica y eficiente para gestionar tus propiedades.
+                    </p>
+
+                    <h3>¿Qué es un recibo de arrendamiento y para qué sirve?</h3>
+                    <p>
+                        Un recibo de arrendamiento o renta, es un documento que se emite cuando un arrendatario paga al propietario del inmueble un alquiler por el usufructo de una propiedad.
+                    </p>
+                    <p>
+                        El recibo de arrendamiento es importante para ambas partes, ya que es un comprobante de pago, que puede utilizarse para:
+                    </p>
+                    <ul>
+                        <li>Registrar el recibo del dinero por parte de la empresa</li>
+                        <li>Como evidencia para el arrendatario de que realizó el pago de su obligación</li>
+                        <li>Puede utilizarse para efectos fiscales y contables de ambas partes.</li>
+                    </ul>
+
+                    <h3>Requisitos de un recibo de pago de renta</h3>
+                    <p>Para que un recibo de arrendamiento sea válido debe cumplir con los siguientes requisitos:</p>
+                    <ul>
+                        <li>Debe tener diligenciada la información de manera clara y legible</li>
+                        <li>No contener tachaduras, rayaduras o corrección de información con otros materiales</li>
+                        <li>Debe describir el valor exacto del dinero de la transacción</li>
+                        <li>Debe estar firmado y sellado por ambas partes</li>
+                    </ul>
+                    <p>En caso de tratarse de una empresa, recomendamos que se expida en el papel identificativo de la organización.</p>
+
+                    <h3>Elementos del recibo de alquiler</h3>
+                    <p>El recibo de arrendamiento debe contener como mínimo la siguiente información:</p>
+                    <ul>
+                        <li>Número consecutivo o código</li>
+                        <li>Lugar y fecha de expedición</li>
+                        <li>Datos del arrendatario: Nombres y apellidos, número de identificación, otros</li>
+                        <li>Valor de la renta</li>
+                        <li>Concepto del recibo</li>
+                        <li>Firma de aceptación de los involucrados</li>
+                    </ul>
+
+                    <h3>Ejemplo recibo de arrendamiento</h3>
+                    <p>Carolina Puentes, el día 4 de Marzo, realizó el pago de la renta del apartamento 105 de la Torre Verona.</p>
+                    <ul>
+                        <li>En el recibo se evidencia la fecha de pago</li>
+                        <li>El monto recibido y la moneda en que cancela</li>
+                        <li>La identificación de la persona que cancela</li>
+                        <li>El concepto del pago</li>
+                        <li>El medio de pago</li>
+                        <li>La firma</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 20px;">
+                    <img src="recibo-renta.png" alt="Ejemplo de Recibo de Renta"
+                         style="max-width: 100%; height: 220px; object-fit: contain;">
+                </div>           
+              `;
+            break;
+          case 'caracteristicas':
+            contenido = `
+              <h2>Características del Formato de Recibo de Arrendamiento</h2>
+              <ul>
+                <li>Completamente editable y personalizable</li>
+                <li>Cálculos automáticos de impuestos e importes</li>
+                <li>Diseño profesional y moderno</li>
+                <li>Exportación con un clic a formato PDF</li>
+                <li>Campos predefinidos para todos los datos relevantes</li>
+                <li>Numeración automática de recibos</li>
+                <li>Compatible con todas las versiones de Excel desde 2010</li>
+                <li>Fácil de usar incluso para principiantes</li>
+              </ul>
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+
+                    <!-- Bloque 1 -->
+                    <div style="display: flex; align-items: flex-start;">
+                        <div style="min-width: 48px; height: 48px; background: #f5f5f5; border: 2px solid #555; border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+                            <i class='bx bx-paint' style="color: #00a884; font-size: 24px;"></i>
+                        </div>
+                        <p><strong>Diseño Profesional y Personalizable:</strong> La plantilla permite adaptar el diseño a la identidad visual de tu negocio, incluyendo logotipos, colores y otros elementos gráficos que refuercen la imagen de tu empresa.</p>
+                    </div>
+
+                    <!-- Bloque 2 -->
+                    <div style="display: flex; align-items: flex-start;">
+                        <div style="min-width: 48px; height: 48px; background: #f5f5f5; border: 2px solid #555; border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+                            <i class='bx bx-calendar' style="color: #00a884; font-size: 24px;"></i>
+                        </div>
+                        <p><strong>Fecha Automatizada:</strong> Incluye un campo de fecha que se actualiza automáticamente al día en curso, garantizando precisión y evitando errores en la emisión de recibos.</p>
+                    </div>
+
+                    <!-- Bloque 3 -->
+                    <div style="display: flex; align-items: flex-start;">
+                        <div style="min-width: 48px; height: 48px; background: #f5f5f5; border: 2px solid #555; border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+                            <i class='bx bx-file' style="color: #00a884; font-size: 24px;"></i>
+                        </div>
+                        <p><strong>Campos Completos y Requeridos:</strong> El formato incluye todos los campos esenciales para un recibo de arrendamiento, como nombre del arrendatario, monto pagado, concepto del pago, fechas y método de pago, asegurando que toda la información necesaria esté presente.</p>
+                    </div>
+
+                    <!-- Bloque 4 -->
+                    <div style="display: flex; align-items: flex-start;">
+                        <div style="min-width: 48px; height: 48px; background: #f5f5f5; border: 2px solid #555; border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+                            <i class='bx bx-export' style="color: #00a884; font-size: 24px;"></i>
+                        </div>
+                        <p><strong>Exportación a PDF:</strong> Ofrece la opción de exportar el recibo directamente a formato PDF, facilitando su impresión, almacenamiento digital o envío por correo electrónico.</p>
+                    </div>
+
+                    <!-- Bloque 5 -->
+                    <div style="display: flex; align-items: flex-start;">
+                        <div style="min-width: 48px; height: 48px; background: #f5f5f5; border: 2px solid #555; border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+                            <i class='bx bx-user' style="color: #00a884; font-size: 24px;"></i>
+                        </div>
+                        <p><strong>Interfaz Intuitiva y Fácil de Usar:</strong> Diseñada para ser fácil de completar, incluso para usuarios con conocimientos básicos de Excel, garantizando una experiencia fluida y eficiente.</p>
+                    </div>
+
+                </div>
+
+            `;
+            break;
+          case 'uso':
+            contenido = `
+              <h2>¿Cómo Usar la Plantilla?</h2>
+              <p>Utilizar nuestra plantilla de recibo de arrendamiento es muy sencillo:</p>
+              <ul>
+                <li>Descarga la plantilla y ábrela en Microsoft Excel</li>
+                <li>Completa los campos con la información del propietario e inquilino</li>
+                <li>Ingresa los detalles del pago, periodo de arrendamiento y concepto</li>
+                <li>Verifica que todos los cálculos sean correctos</li>
+                <li>Guarda una copia en Excel para tus registros</li>
+                <li>Exporta a PDF para enviar al inquilino o imprimir</li>
+              </ul>
+              
+              <div style="padding: 16px;">
+                <h3 style="font-size: 20px; font-weight: bold;">Para utilizar el formato de recibo de arrendamiento, sigue estos pasos:</h3>
+                <ul style="margin-left: 20px; line-height: 1.6;">
+                <li><strong>Número del recibo de renta:</strong> Indica el número correspondiente de acuerdo al consecutivo de recibos que llevas (solo escribe el número).</li>
+                <li><strong>Fecha del recibo:</strong> El campo está formulado para tomar automáticamente la fecha real del día en curso en que se generará el recibo.</li>
+                <li><strong>Cantidad:</strong> Ingresa el importe o valor por el cual se generará el pago del arrendamiento.</li>
+                <li><strong>Recibí de:</strong> Registra el nombre del pagador o arrendatario del alquiler y, frente a este, indica la moneda en la que se realiza la transacción.</li>
+                <li><strong>Concepto:</strong> Especifica el concepto del pago de renta, como “pago de alquiler” o “arrendamiento”, e incluye la dirección del inmueble.</li>
+                <li><strong>Fecha de pago desde / hasta:</strong> Registra el período de fechas para las cuales se emite el pago, indicando la fecha de inicio y la fecha final. Por ejemplo, si se cancela una renta desde el 01/01/23 hasta el 31/01/23.</li>
+                <li><strong>Método de pago:</strong> Selecciona uno o varios medios de pago utilizados para la transacción: efectivo, cheque, transferencia.</li>
+                <li><strong>Nombre y firma:</strong> Firma del arrendador como comprobante del pago de la renta. También puedes imprimir dos copias del recibo para que una sea firmada por el arrendador y otra por el arrendatario, de manera que ambos tengan un soporte documental.</li>
+                </ul> 
+              </div>             
+            `;
+            break;
+          case 'beneficios':
+            contenido = `
+              <h2>Beneficios de Nuestra Plantilla</h2>
+              <p>Al utilizar nuestra plantilla de recibo de arrendamiento, obtendrás:</p>
+              <ul>
+                <li>Ahorro significativo de tiempo en la generación de documentos</li>
+                <li>Reducción de errores en cálculos y datos</li>
+                <li>Imagen profesional ante tus inquilinos</li>
+                <li>Mayor organización en tu gestión de arrendamientos</li>
+                <li>Facilidad para mantener registros financieros precisos</li>
+                <li>Cumplimiento con los requisitos legales para recibos</li>
+                <li>Proceso de cobro más eficiente y transparente</li>
+              </ul>
+
+              <div style="padding: 16px;">
+                <h3 style="font-size: 20px; font-weight: bold;">Cómo usar el Formato de Recibo de Arrendamiento en Excel</h3>
+                <ul style="margin-left: 20px; line-height: 1.6;">
+                <li>Ahorro de Tiempo y Eficiencia: Automatiza el proceso de generación de recibos, reduciendo significativamente el tiempo dedicado a la creación manual de documentos, lo que permite enfocarte en otras tareas más importantes..</li>
+                <li>Documentación Clara y Profesional: Proporciona un formato estandarizado y profesional, lo que asegura que todos los recibos emitidos sean claros, consistentes y fáciles de entender para ambas partes.</li>
+                <li>Flexibilidad y Personalización: Permite personalizar el diseño y contenido del recibo según las necesidades de tu negocio, incluyendo logotipos, colores corporativos y otros elementos visuales que refuercen la imagen de tu marca.</li>
+                <li>Reducción de Errores: Gracias a las funciones automatizadas, como la actualización de la fecha y la validación de campos, se minimizan los errores humanos, asegurando que los recibos contengan siempre la información correcta.</li>
+                <li>Compatibilidad y Fácil Almacenamiento: Al poder exportar los recibos en formato PDF, es sencillo almacenar, imprimir o enviar los documentos electrónicamente, facilitando la gestión y organización de tus registros.</li>
+                <li>Adaptabilidad a Diferentes Monedas: El formato permite cambiar la moneda de pago fácilmente, lo que es ideal para propietarios o empresas que manejan arrendamientos en diferentes países o con clientes internacionales.</li>
+                <li>Cumplimiento Legal y Fiscal: Ofrece un comprobante formal que puede utilizarse para efectos fiscales y contables, asegurando que tanto el arrendador como el arrendatario tengan un registro válido y legal del pago realizado.</li>
+                </ul>
+              </div>
+            `;
+            break;
+        }
+
+        panel.innerHTML = contenido;
+        panel.style.opacity = 1;
+        panel.classList.add('fade-in');
+      }, 200);
+    }
+
+    // Función para abrir enlaces de redes sociales
+    function abrirRed(red) {
+      let url = '';
+
+      switch (red) {
+        case 'whatsapp':
+          url = 'https://wa.me/51900632032';
+          break;
+        case 'facebook':
+          url = 'https://facebook.com/tuusuario';
+          break;
+        case 'instagram':
+          url = 'https://instagram.com/tuusuario';
+          break;
+        case 'correo':
+          url = 'mailto:anthony@ejemplo.com';
+          break;
+        case 'telegram':
+          url = 'https://t.me/tuusuario';
+          break;
+        case 'linkedin':
+          url = 'https://linkedin.com/in/tuusuario';
+          break;
+      }
+
+      window.open(url, '_blank');
+    }
+    
+    // Mostrar la descripción por defecto al cargar la página
+    window.onload = function() {
+      mostrarContenido('descripcion');
+    };
+  </script>
+
+</body>
+</html>
